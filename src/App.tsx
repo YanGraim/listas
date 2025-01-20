@@ -1,13 +1,18 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 function App() {
   const [input, setInput] = useState("");
   const [tasks, setTasks] = useState<string[]>([]);
-
   const [editTask, setEditTask] = useState({
     enable: false,
     task: ''
   })
+  const [teste, setTeste] = useState(true);
+
+
+  useEffect(() => {
+    console.log("Componente montado!");
+  }, []);
 
 
   function handleRegister() {
