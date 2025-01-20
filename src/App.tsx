@@ -97,8 +97,8 @@ function App() {
       </button>
 
       <hr />
-
-      <strong>Você tem {totalTarefas} tarefas!</strong> <br /> <br />
+      
+      <strong>{totalTarefas > 1 ? `Você tem ${totalTarefas} tarefas` : `Você tem ${totalTarefas} tarefa`}</strong> <br /> <br />
 
       {tasks.map((item) => (
         <section key={item}>
