@@ -7,12 +7,13 @@ function App() {
     enable: false,
     task: ''
   })
-  const [teste, setTeste] = useState(true);
+  const [teste, setTeste] = useState(false);
 
 
   useEffect(() => {
     console.log("Componente montado!");
-  }, []);
+    console.log("Componente sofre alteração por conta do useState teste")
+  }, [teste]);
 
 
   function handleRegister() {
@@ -61,6 +62,7 @@ function App() {
 
   return (
     <div>
+      <button onClick={() => setTeste(true)}>Clicar</button>
       <h1>Lista de tarefas</h1>
 
       <input
