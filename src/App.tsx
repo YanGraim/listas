@@ -1,6 +1,7 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 
 function App() {
+  const inputRef = useRef<HTMLInputElement>(null);
   const [input, setInput] = useState("");
   const [tasks, setTasks] = useState<string[]>([]);
   const [editTask, setEditTask] = useState({
@@ -59,6 +60,8 @@ function App() {
   }
 
   function handleEdit(item: string) {
+    inputRef.current?.focus();
+
     setInput(item);
     setEditTask({
       enable: true,
@@ -75,6 +78,7 @@ function App() {
         placeholder='Digite o nome da tarefa...'
         value={input}
         onChange={(e) => setInput(e.target.value)}
+        ref={inputRef}
       />
 
       <button onClick={handleRegister}>
