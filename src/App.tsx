@@ -10,8 +10,10 @@ function App() {
 
 
   useEffect(() => {
-    console.log("Componente montado!");
-    console.log("Componente sofre alteração por conta do useState teste")
+    const listaSalva = localStorage.getItem("@lista");
+    if(listaSalva) {
+      setTasks(JSON.parse(listaSalva));
+    }
   }, []);
 
 
@@ -67,7 +69,6 @@ function App() {
 
   return (
     <div>
-      <button onClick={() => setTeste(true)}>Clicar</button>
       <h1>Lista de tarefas</h1>
 
       <input
