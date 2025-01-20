@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useMemo } from 'react'
+import { useState, useEffect, useRef, useMemo, useCallback  } from 'react'
 
 function App() {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -30,7 +30,8 @@ function App() {
   }, [tasks])
 
 
-  function handleRegister() {
+
+  const handleRegister = useCallback(() => {
     if(!input) {
       alert('Preencha uma tarefa');
       return;
@@ -43,7 +44,7 @@ function App() {
 
     setTasks(tarefas => [...tarefas, input]);
     setInput('');
-  }
+  }, [input, tasks])
 
   function handleSaveEdit() {
     const findIndex = tasks.findIndex(task => task === editTask.task);
