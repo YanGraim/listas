@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useMemo } from 'react'
 
 function App() {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -75,6 +75,10 @@ function App() {
     })
   }
 
+  const totalTarefas = useMemo(() => {
+    return tasks.length
+  }, [tasks])
+
 
   return (
     <div>
@@ -92,6 +96,9 @@ function App() {
       </button>
 
       <hr />
+
+      <strong>Você tem {totalTarefas} tarefas!</strong> <br /> <br />
+
       {tasks.map((item) => (
         <section key={item}>
           <span>{item}</span>
