@@ -2,6 +2,8 @@ import { useState, useEffect, useRef } from 'react'
 
 function App() {
   const inputRef = useRef<HTMLInputElement>(null);
+  const firstRender = useRef(true);
+
   const [input, setInput] = useState("");
   const [tasks, setTasks] = useState<string[]>([]);
   const [editTask, setEditTask] = useState({
@@ -17,6 +19,16 @@ function App() {
     }
   }, []);
 
+  useEffect(() => {
+    if(firstRender.current) {
+      firstRender.current = false;
+      return;
+    }
+
+    localStorage.setItem("@lista", JSON.stringify(tasks))
+    console.log("useEffect foi chamado")
+  }, [tasks])
+
 
   function handleRegister() {
     if(!input) {
@@ -31,8 +43,6 @@ function App() {
 
     setTasks(tarefas => [...tarefas, input]);
     setInput('');
-
-    localStorage.setItem("@lista", JSON.stringify([...tasks, input]));
   }
 
   function handleSaveEdit() {
@@ -48,15 +58,11 @@ function App() {
     })
 
     setInput('');
-    
-    localStorage.setItem("@lista", JSON.stringify(allTasks));
   }
 
   function handleDelete(item: string) {
     const removeTasks = tasks.filter(tasks => tasks !== item);
     setTasks(removeTasks);
-
-    localStorage.setItem("@lista", JSON.stringify(removeTasks));
   }
 
   function handleEdit(item: string) {
