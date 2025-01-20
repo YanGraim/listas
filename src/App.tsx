@@ -7,13 +7,12 @@ function App() {
     enable: false,
     task: ''
   })
-  const [teste, setTeste] = useState(false);
 
 
   useEffect(() => {
     console.log("Componente montado!");
     console.log("Componente sofre alteração por conta do useState teste")
-  }, [teste]);
+  }, []);
 
 
   function handleRegister() {
@@ -29,6 +28,8 @@ function App() {
 
     setTasks(tarefas => [...tarefas, input]);
     setInput('');
+
+    localStorage.setItem("@lista", JSON.stringify([...tasks, input]));
   }
 
   function handleSaveEdit() {
@@ -44,11 +45,15 @@ function App() {
     })
 
     setInput('');
+    
+    localStorage.setItem("@lista", JSON.stringify(allTasks));
   }
 
   function handleDelete(item: string) {
     const removeTasks = tasks.filter(tasks => tasks !== item);
     setTasks(removeTasks);
+
+    localStorage.setItem("@lista", JSON.stringify(removeTasks));
   }
 
   function handleEdit(item: string) {
